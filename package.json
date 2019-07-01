@@ -1,0 +1,16 @@
+{
+  "name": "webpack-starter",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --mode production",
+    "build:dev": "webpack --mode development"
+  },
+  "repository": "https://github.com/mashafrancis/webpack-starter.git",
+  "author": "Francis Masha <francismasha96@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "webpack": "^4.35.0",
+    "webpack-cli": "^3.3.5"
+  }
+}
