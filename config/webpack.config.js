@@ -1,10 +1,11 @@
 const path = require('path');
-const autoprefixer = require('autoprefixer');
 const {importer} = require('./webpack.util');
 const {
   cleanWebpack,
   htmlWebpack,
   miniCssExtract,
+  miniCssExtractPlugin,
+  hashedPlugin,
 } = require('./webpack.plugins');
 
 const isDevMode = process.env.APP_ENV !== 'production';
@@ -18,6 +19,10 @@ module.exports = {
     path: path.join(__dirname, '..', 'dist'),
     filename: '[name].[hash:8].js',
     publicPath: '/'
+  },
+  optimization: {
+    noEmitOnErrors: true,
+    namedChunks: true,
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js'],
@@ -40,7 +45,7 @@ module.exports = {
       {
         test: /\.(scss|css)$/,
         use: [
-          isDevMode ? 'style-loader' : miniCssExtract.loader,
+          isDevMode ? 'style-loader' : miniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
             options: {
@@ -90,6 +95,7 @@ module.exports = {
   },
   plugins: [
     htmlWebpack,
+    hashedPlugin,
     cleanWebpack,
     miniCssExtract,
   ]
