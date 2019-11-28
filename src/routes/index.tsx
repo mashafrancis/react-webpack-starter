@@ -5,7 +5,7 @@ import * as React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
 // pages
-import HomePage from 'pages/HomePage';
+import HomePage from '@pages/HomePage';
 
 const Routes = () => (
   <Route>

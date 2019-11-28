@@ -13,7 +13,7 @@ export class App extends React.Component<AppProps, AppState> {
       <React.Fragment>
         <Routes />
       </React.Fragment>
-    )
+    );
   }
 }
 
