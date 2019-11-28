@@ -6,18 +6,13 @@ import { HomePageProps, HomePageState } from './interfaces';
 // styles
 import './HomePage.scss';
 
-export class HomePage extends React.Component<HomePageProps, HomePageState> {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return (
-      <React.Fragment>
-        <h2>Awesome Dev</h2>
-      </React.Fragment>
-    );
-  }
-}
+export const HomePage: React.FunctionComponent<HomePageProps> = (props) => {
+  const [state, setState] = React.useState<HomePageState>({});
+  return (
+    <React.Fragment>
+      <h2>Awesome Dev</h2>
+    </React.Fragment>
+  );
+};
 
 export default HomePage;
