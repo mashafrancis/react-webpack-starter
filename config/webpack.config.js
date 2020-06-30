@@ -49,7 +49,7 @@ module.exports = {
         test: /\.(woff(2)?|ttf|eot|svg|png|jpg|jpeg|gif)$/,
         use: {
           loader: 'file-loader'
-        }
+        },
       },
       {
         test: /\.(scss|css)$/,
@@ -73,8 +73,12 @@ module.exports = {
             loader: 'sass-loader',
             options: {
               sourceMap: true,
-              importer,
-              includePaths: ['../node_modules'],
+              // Prefer `dart-sass`
+              implementation: require('sass'),
+              sassOptions: {
+                fiber: require('fibers'),
+                importer
+              }
             }
           },
         ]
@@ -83,7 +87,8 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: [
           /node_modules/,
-          /node_modules\/@material/
+          /node_modules\/@material/,
+          /node_modules\/(?!(@material-ui\/core\/es)\/).*/,
         ],
         use: {
           loader: 'babel-loader',

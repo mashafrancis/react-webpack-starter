@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "es6",
     "lib": [
-      "es2015",
+      "es6",
       "es2017",
       "esnext.asynciterable",
       "dom"
@@ -10,19 +10,30 @@
     "typeRoots": [
       "./node_modules/@types"
     ],
+    "downlevelIteration": true,
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "forceConsistentCasingInFileNames": true,
+    "strictNullChecks": true,
+    "noImplicitThis": true,
+    "strictBindCallApply": true,
+    //    "strict": true,
+    "suppressImplicitAnyIndexErrors": true,
     "moduleResolution": "node",
+    //    "esModuleInterop": true,
+    //    "noImplicitAny": true,
+    "declaration": true,
+    "declarationMap": true,
     "removeComments": true,
     "skipLibCheck": true,
-    "module": "commonjs",
+    "module": "esnext",
     "pretty": true,
     "sourceMap": true,
-    "outDir": "./build",
+    "outDir": "./dist",
     "allowJs": true,
     "noEmit": false,
+    "importHelpers": true,
     "jsx": "react",
     "baseUrl": "./",
     "paths": {
@@ -30,7 +41,8 @@
       "@placeholders/*": ["src/placeholders/*"],
       "@pages/*": ["src/pages/*"],
       "@modules/*": ["src/store/modules/*"],
-      "@utils/*": ["src/utils/*"]
+      "@utils/*": ["src/utils/*"],
+      "@context/*": ["src/context/*"]
     }
   },
   "include": [

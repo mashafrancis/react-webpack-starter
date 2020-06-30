@@ -20,16 +20,28 @@ const miniCssExtract = new miniCssExtractPlugin();
 const hotModuleReplacementPlugin = new webpack.HotModuleReplacementPlugin();
 const hashedPlugin = new webpack.HashedModuleIdsPlugin();
 
-// call dotenv and it will return an Object with a parsed key
-const env = dotenv.config().parsed;
+/**
+ * Parses environment variables into a format acceptable by the webpack DefinePlugin
+ * @param {object} configs Object literal containing configuration variables to
+ * parse before sending them to react
+ */
+const parseConfigs = configs => Object.keys(configs || {}).reduce(
+  (acc, val) => ({ ...acc, [val]: JSON.stringify(configs[val]) }),
+  {},
+);
 
-// reduce it to a nice object, the same as before
-const envKeys = Object.keys(env).reduce((prev, next) => {
-  prev[`process.env.${next}`] = JSON.stringify(env[next]);
-  return prev;
-}, {});
+// fetch system environment variables
+const systemVariables = parseConfigs(process.env);
 
-const definePlugin = new webpack.DefinePlugin(envKeys);
+// fetch environment variables from the dotenv file
+const { parsed: dotenvConfigs } = dotenv.config();
+
+// process the environment variables from the dotenv file
+const processedDotenvConfigs = parseConfigs(dotenvConfigs);
+
+const definePlugin = new webpack.DefinePlugin({
+  'process.env': { ...processedDotenvConfigs, ...systemVariables },
+});
 
 module.exports = {
   cleanWebpack,
